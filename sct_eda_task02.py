@@ -331,18 +331,15 @@ print(f"\n{'='*80}")
 print("RUNNING TIME ANALYSIS")
 print(f"{'='*80}")
 
-# Extract numeric runtime from the running time column
 df['Runtime_Minutes'] = df['Running Time'].str.extract('(\d+)').astype(float)
-
 runtime_stats = df['Runtime_Minutes'].describe()
 print(f"\n⏰ Runtime Statistics (in minutes):")
 print(runtime_stats)
 
-# Runtime categories
+
 df['Runtime_Category'] = pd.cut(df['Runtime_Minutes'],
                                bins=[0, 90, 120, 150, 300],
                                labels=['Short (<90 min)', 'Medium (90-120 min)', 'Long (120-150 min)', 'Very Long (>150 min)'])
-
 runtime_cat_counts = df['Runtime_Category'].value_counts()
 print(f"\n🎬 Movies by Runtime Category:")
 print(runtime_cat_counts)
@@ -404,7 +401,7 @@ print(f"\n{'='*80}")
 print("CORRELATION ANALYSIS")
 print(f"{'='*80}")
 
-# Select numeric columns for correlation
+
 numeric_cols = ['IMDb_Rating_Clean', 'Year_Clean', 'Runtime_Minutes']
 correlation_data = df[numeric_cols].dropna()
 
@@ -428,7 +425,7 @@ print(f"\n{'='*80}")
 print("OUTLIER DETECTION")
 print(f"{'='*80}")
 
-# Outlier detection for numeric columns
+
 for col in ['IMDb_Rating_Clean', 'Runtime_Minutes']:
     if col in df.columns:
         data = df[col].dropna()
